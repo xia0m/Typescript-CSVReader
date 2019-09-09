@@ -1,17 +1,11 @@
+import { MatchReader } from './MatchReader';
 import { CsvFileReader } from './CsvFileReader';
 import { MatchResult } from './MatchResult';
-const reader = new CsvFileReader('football.csv');
-reader.read();
-const matches = reader.data;
 
-let manUnitedWins = 0;
+const csvFileReader = new CsvFileReader('football.csv');
+const matchReader = new MatchReader(csvFileReader);
+matchReader.load();
 
-for (let match of matches) {
-  if (match[1] === 'Man United' && match[5] === 'H') {
-    manUnitedWins++;
-  } else if (match[2] === 'Man United' && match[5] === 'A') {
-    manUnitedWins++;
-  }
-}
+// const matches = reader.data;
 
 console.log(`Man United won ${manUnitedWins} games`);
